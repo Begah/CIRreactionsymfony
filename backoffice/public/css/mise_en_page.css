@@ -1,0 +1,59 @@
+/*__________________________commun____________________________*/
+h1{
+    margin : auto
+}
+a, button {
+    font-family : "Monstserrat", sans-serif;
+    font-weight: 500;
+    color : #2e454d;
+    text-decoration: none;
+}
+
+/*___________________________tableau___________________________*/
+table{
+    margin : auto;
+}
+td {
+    border: 1px solid #333;
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+}
+
+/*_________________________header_____________________________*/
+* {
+    box-sizing: border-box;
+    margin : 0;
+    padding : 0;
+    background-color: cadetblue;
+}
+
+.header {
+    display : flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+    background-color: #24252A;
+}
+
+.nav_links li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+
+/*___________________________footer___________________________*/
+.footer{
+    align-items: center;
+    background-color: #24252A;
+    position:absolute;
+    bottom:0;
+    width:100%;
+    padding-top:100px;
+    height:100px;
+}
+
+
