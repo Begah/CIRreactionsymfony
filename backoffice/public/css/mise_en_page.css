@@ -1,59 +1,50 @@
-/*__________________________commun____________________________*/
-h1{
-    margin : auto
+html,
+body {
+  height: 100%;
 }
-a, button {
-    font-family : "Monstserrat", sans-serif;
-    font-weight: 500;
-    color : #2e454d;
-    text-decoration: none;
+body {
+  margin: 0;
+  background: linear-gradient(45deg, #49a09d, #5f2c82);
+  font-family: sans-serif;
+  font-weight: 100;
 }
-
-/*___________________________tableau___________________________*/
-table{
-    margin : auto;
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
+table {
+  width: 800px;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+Q th,
 td {
-    border: 1px solid #333;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
 }
-
-thead,
-tfoot {
-    background-color: #333;
-    color: #fff;
+th {
+  text-align: left;
 }
-
-/*_________________________header_____________________________*/
-* {
-    box-sizing: border-box;
-    margin : 0;
-    padding : 0;
-    background-color: cadetblue;
+thead th {
+  background-color: #55608f;
 }
-
-.header {
-    display : flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 10%;
-    background-color: #24252A;
+tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
-
-.nav_links li{
-    display: inline-block;
-    padding: 0px 20px;
+tbody td {
+  position: relative;
 }
-
-
-/*___________________________footer___________________________*/
-.footer{
-    align-items: center;
-    background-color: #24252A;
-    position:absolute;
-    bottom:0;
-    width:100%;
-    padding-top:100px;
-    height:100px;
+tbody td:hover:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9999px;
+  bottom: -9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: -1;
 }
-
-

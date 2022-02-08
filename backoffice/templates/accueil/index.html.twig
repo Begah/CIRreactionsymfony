@@ -1,6 +1,10 @@
 {%extends 'base.html.twig' %}
 
-{% block title%}Premier formulaire sur le cours{% endblock%}
+{% block title%}Premier formulaire sur le cours{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/autocomplete.js') }}"></script>
+{% endblock %}
 
 {%block body%}
 {{ form_start(form)}}

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Espece
  *
  * @ORM\Table(name="espece")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\EspeceRepository")
  */
 class Espece
 {
@@ -44,10 +44,9 @@ class Espece
 
         return $this;
     }
-    public function __ToString()
+
+    public function __toString()
     {
         return $this->getEspece();
     }
-
-
 }

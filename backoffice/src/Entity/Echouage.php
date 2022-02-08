@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Echouage
  *
- * @ORM\Table(name="echouage", indexes={@ORM\Index(name="fk_zone_id", columns={"zone_id"}), @ORM\Index(name="fk_espace_id", columns={"espece_id"})})
- * @ORM\Entity
+ * @ORM\Table(name="echouage", indexes={@ORM\Index(name="fk_espace_id", columns={"espece_id"}), @ORM\Index(name="fk_zone_id", columns={"zone_id"})})
+ * @ORM\Entity(repositoryClass="App\Repository\EchouageRepository")
  */
 class Echouage
 {
@@ -36,16 +36,6 @@ class Echouage
     private $nombre;
 
     /**
-     * @var \Espece
-     *
-     * @ORM\ManyToOne(targetEntity="Espece")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="espece_id", referencedColumnName="id")
-     * })
-     */
-    private $espece;
-
-    /**
      * @var \Zone
      *
      * @ORM\ManyToOne(targetEntity="Zone")
@@ -54,6 +44,16 @@ class Echouage
      * })
      */
     private $zone;
+
+    /**
+     * @var \Espece
+     *
+     * @ORM\ManyToOne(targetEntity="Espece")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="espece_id", referencedColumnName="id")
+     * })
+     */
+    private $espece;
 
     public function getId(): ?int
     {
@@ -84,6 +84,18 @@ class Echouage
         return $this;
     }
 
+    public function getZone(): ?Zone
+    {
+        return $this->zone;
+    }
+
+    public function setZone(?Zone $zone): self
+    {
+        $this->zone = $zone;
+
+        return $this;
+    }
+
     public function getEspece(): ?Espece
     {
         return $this->espece;
@@ -96,16 +108,5 @@ class Echouage
         return $this;
     }
 
-    public function getZone(): ?Zone
-    {
-        return $this->zone;
-    }
-
-    public function setZone(?Zone $zone): self
-    {
-        $this->zone = $zone;
-
-        return $this;
-    }
 
 }

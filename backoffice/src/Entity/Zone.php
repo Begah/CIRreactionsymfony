@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Zone
  *
  * @ORM\Table(name="zone")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ZoneRepository")
  */
 class Zone
 {
@@ -44,10 +44,9 @@ class Zone
 
         return $this;
     }
-    public function __ToString()
+
+    public function __toString()
     {
-        return $this->getZone();   
+        return $this->getZone();
     }
-
-
 }
