@@ -1,31 +1,38 @@
-import react from "react";
-import Champ from "./components";
+import App from "../App";
+import React, { Component } from "react"; //a la place du import React from "react";
+import CanvasJSReact from './canvasjs.react';//bibliothèque du site de Canvas pour tester un graph
 
-function Graphique() {
+var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-  const tableau = {
-    labes : [
-      " ",
-      " ",
-    ],
-    datasets : [{
-      label: "Liste d'echouage par zones de ${demande.espece} des années ${demande.debut} à ${demande.fin}",
-      data: [
-        
-      ],
-    }], 
+
+class Graphique extends Component {
+
+    render() {
+
+      const options = {
+        animationEnabled: true,
+        exportEnabled: true,
+        theme: "light2",
+        title:{
+          text: "Affichage des echouages"
+        },
+        data:[{
+          type: "column",
+          dataPoints: [
+            { x: 110, y: 21 },
+            { x: 120, y: 49 },
+            { x: 130, y: 36 }
+          ]
+        }]
+      }
+
+      return (
+        <div className="Graphique">
+          <CanvasJSChart options = {options} />
+        </div>
+      );
+    }
   }
 
-  /*
-  function graphique() {
-    return (
-      <div className="graphique">
-        <Bar graphique={graphique}/>
-      </div>
-    )
-  }
-  */
-}
-
-
-export default Graphique;
+  export default Graphique;

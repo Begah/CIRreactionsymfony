@@ -40,3 +40,16 @@
 .App{
   background: linear-gradient(45deg, #49a09d, #5f2c82);
 }
+
+.footer{
+  background-color: black;
+}
+
+/*
+.div1{
+  background-color: #5f2c82;
+}
+.div2{
+  background-color: chartreuse;
+}
+*/
