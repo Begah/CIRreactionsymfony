@@ -18,8 +18,7 @@ function autocomplete_activate(input_field) {
 function autocomplete_fill(autocomplete_div, suggestions, input_len, callback_autocompleted) {
     for (i = 0; i < suggestions.length; i++) {
         b = document.createElement("DIV");
-        b.innerHTML = "<strong>" + suggestions[i].substr(0, input_len) + "</strong>";
-        b.innerHTML += suggestions[i].substr(input_len);
+        b.innerHTML += suggestions[i];
         b.innerHTML += "<input type='hidden' value=\"" + suggestions[i] + "\">";
         b.addEventListener("click", function (e) {
             callback_autocompleted(this.getElementsByTagName("input")[0].value);

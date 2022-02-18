@@ -16,7 +16,9 @@
     </head>
     <body>
         {% include 'layout/header.html.twig' %}
-        {% block body %}{% endblock %}
+        <div class="Content">
+            {% block body %}{% endblock %}
+        </div>
         {% include 'layout/footer.html.twig' %}
     </body>
 </html>

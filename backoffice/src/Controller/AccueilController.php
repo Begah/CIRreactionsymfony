@@ -21,7 +21,7 @@ use App\Entity\Espece;
 class AccueilController extends AbstractController
 {
     /**
-     * @Route("/", name="accueil")
+     * @Route("", name="accueil")
      */
     public function acceuil(Request $request): Response
     {
@@ -43,19 +43,35 @@ class AccueilController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $zone = $form->get('Zone')->getData();
             $espece = $form->get('Espece')->getData();
+            $alreadysubmitted = intval($form->get('Submitted')->getData());
 
-            return $this->redirectToRoute('tableau', ['zone' => $zone, 'espece' => $espece]);
+            $tab = $this->tableau($zone, $espece);
+
+            if($tab == null) {
+                return $this->render('accueil/index.html.twig', [
+                    'form' => $form->createView(),
+                    'display_table' => true,
+                    'tableau' => array(),
+                    'anim_state' => $alreadysubmitted < 2 ? 2 : 3
+                ]);
+            } else {
+                return $this->render('accueil/index.html.twig', [
+                    'form' => $form->createView(),
+                    'display_table' => true,
+                    'tableau' => $tab,
+                    'anim_state' => $alreadysubmitted < 2 ? 2 : 3
+                ]);
+            }
         }
 
         return $this->render('accueil/index.html.twig', [
             'form' => $form->createView(),
+            'display_table' => false,
+            'anim_state' => 1
         ]);
     }
 
-    /**
-     * @Route("/tableau/{zone}/{espece}", name="tableau")
-     */
-    public function tableau(Request $request, int $zone, string $espece): Response
+    public function tableau(int $zone, string $espece): ?array
     {
         $espece_entity = $this->getDoctrine()->getManager()
             ->getRepository(Espece::class)
@@ -81,6 +97,7 @@ class AccueilController extends AbstractController
             $zone_column_index = 1;
             $column_count = 1 + count($liste_zones);
             $year_per_zones = array_fill(0, $column_count - 1, 0);
+
             foreach ($liste_zones as $id => $zone_entity) {
                 array_push($header, $zone_entity->getZone());
 
@@ -120,17 +137,16 @@ class AccueilController extends AbstractController
                 }
             }
             for($i = 0; $i < $column_count - 1; ++$i) {
-                $average[$i] = round($average[$i] / $year_per_zones[$i]);
+                $average[$i] = $year_per_zones[$i] == 0 ? 0 : round($average[$i] / $year_per_zones[$i]);
             }
 
-            return $this->render('accueil/tableau.html.twig', [
+            return array(
                 'header' => $header,
                 'list' => $tableau,
                 'averages' => $average,
                 'mins' => $min,
-                'maxs' => $max
-            ]);
+                'maxs' => $max);
         }
-        exit(\Doctrine\Common\Util\Debug::dump($espece_entity));
+        return null;
     }
 }

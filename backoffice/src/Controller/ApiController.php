@@ -31,6 +31,7 @@ class ApiController extends AbstractController
 
         $response = new Response(json_encode($especes_options));
         $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set("Access-Control-Allow-Origin", "*");
 
         return $response;
     }
@@ -50,6 +51,7 @@ class ApiController extends AbstractController
         if($espece == null) {
             $response = new Response(json_encode(array('Invalid')));
             $response->headers->set('Content-Type', 'application/json');
+            $response->headers->set("Access-Control-Allow-Origin", "*");
 
             return $response;
         } else {
@@ -74,6 +76,7 @@ class ApiController extends AbstractController
 
             $response = new Response(json_encode($tableau));
             $response->headers->set('Content-Type', 'application/json');
+            $response->headers->set("Access-Control-Allow-Origin", "*");
 
             return $response;
         }

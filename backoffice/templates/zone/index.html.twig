@@ -3,8 +3,11 @@
 {% block title %}Zone index{% endblock %}
 
 {% block body %}
+<div class="div_left">
     <h1>Zone index</h1>
-
+    <a href="{{ path('zone_new') }}">Create new</a>
+</div>
+<div class="div_right">
     <table class="table">
         <thead>
             <tr>
@@ -30,6 +33,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('zone_new') }}">Create new</a>
+</div>
 {% endblock %}

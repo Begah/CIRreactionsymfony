@@ -7,8 +7,89 @@
 {% endblock %}
 
 {%block body%}
+<div class="div_left"
+{% if anim_state == 1 %}
+id="anim_div_left_1"
+{% elseif anim_state == 2 %}
+id="anim_div_left_2"
+{% else %}
+id="anim_div_left_3"
+{% endif %}>
 {{ form_start(form)}}
     {{form_widget(form)}}
     <button class="btn">{{ button_label|default('Save')}}</button>
 {{ form_end(form)}}
+</div>
+
+<div class="div_right"
+{% if anim_state == 1 %}
+id="anim_div_right_1"
+{% elseif anim_state == 2 %}
+id="anim_div_right_2"
+{% else %}
+id="anim_div_right_3"
+{% endif %}>
+{% if display_table == true %}
+{% if tableau|length == 0 %}
+    <h2> Espece inconnue </h2>
+{% else %}
+<table>
+
+    <thead>
+
+        <tr>
+            {% for ele in tableau.header %}
+            <th>
+                {{ele}}
+            </th>
+            {% endfor %}
+        </tr>
+
+    </thead>
+    <tbody>
+
+        {% for row in tableau.list %}
+        <tr>
+            {% for ele in row %}
+                <td>
+                    {% if ele == '0' %}
+                     -
+                    {% else %}
+                        {{ele}}
+                    {% endif %}
+                </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th> Zone </th>
+            <th> Moyenne </th>
+            <th> Max </th>
+            <th> Min </th>
+        </tr>
+    <thead>
+    <tbody>
+
+        {% for zone in tableau.averages %}
+
+            <tr>
+                <td> {{tableau.header[loop.index]}} </td>
+                <td> {{tableau.averages[loop.index0]}} </td>
+                <td> {{tableau.maxs[loop.index0]}} </td>
+                <td> {{tableau.mins[loop.index0]}} </td>
+            </tr>
+
+        {% endfor %}
+
+    </tbody>
+</table>
+{% endif %}
+{% endif %}
+</div>
 {% endblock %}

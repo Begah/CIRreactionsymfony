@@ -3,10 +3,11 @@
 {% block title %}Echouage index{% endblock %}
 
 {% block body %}
-
+<div class="div_left">
     <h1>Echouage index</h1>
+</div>
 
-
+<div class="div_right">
     <table class="table">
         <thead>
             <tr>
@@ -34,6 +35,5 @@
         {% endfor %}
         </tbody>
     </table>
-    
-    {{ include('layout/footer.html.twig') }}
+</div>    
 {% endblock %}
