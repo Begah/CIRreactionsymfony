@@ -119,11 +119,11 @@ html, body {
 
 /* Table */
 table {
-  background: linear-gradient(45deg, #49a09daa, #5f2c82aa);
-  border-collapse: collapse;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-collapse: collapse;
 
   height: fit-content;
+  border: 2px solid black;
 }
 
 td {
@@ -134,6 +134,31 @@ td {
 
 .div_right {
   overflow-y: auto;
+}
+
+thead {
+  position: sticky;
+  top: 0%;
+  background-color: #5f2c82ff;
+}
+
+tbody {
+  background: linear-gradient(45deg, #49a09daa, #5f2c82aa);
+}
+
+td {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+thead {
+  height: fit-content;
+}
+
+thead th {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /* Form */
@@ -163,9 +188,39 @@ form div div *:nth-child(odd) {
   margin-top: 25px;
   margin-left: 10px;
 
-  background-color: gray;
+  background-color: rgb(86, 121, 197);
 }
 
 .autocomplete-items div {
   margin: 0px;
+}
+
+/* Fish AI */
+@keyframes swim_left {
+  from {
+    left: 0%;
+  }
+
+  to {
+    left: 95%;
+  }
+}
+
+@keyframes swim_down {
+  from {
+    top: 5%;
+  }
+
+  to {
+    top: 85%;
+  }
+}
+
+.fish {
+  z-index: -1;
+  position: absolute;
+  
+  animation: 
+    30s infinite alternate both swim_left, 
+    20s 5s infinite alternate both swim_down;
 }

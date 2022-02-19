@@ -1,38 +1,79 @@
 import App from "../App";
-import React, { Component } from "react"; //a la place du import React from "react";
+import React from "react"; //a la place du import React from "react";
 import CanvasJSReact from './canvasjs.react';//bibliothèque du site de Canvas pour tester un graph
 
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
+function Graphique(props) {
+  const [data, setData] = React.useState();
+  const [key, setKey] = React.useState();
 
-class Graphique extends Component {
+  let chart = React.useRef();
 
-    render() {
+  React.useEffect(() => {
+    console.log("Data : ", `http://127.0.0.1:8000/api/espece/${props.info['debut']}/${props.info['fin']}/${props.info['espece']}`);
+    fetch(`http://127.0.0.1:8000/api/espece/${props.info['debut']}/${props.info['fin']}/${props.info['espece']}`) //$ permet de dire que c'est la variable
+      .then((res) => res.json())
+      .then((res) => {
+        setData(
+          Object.keys(res).map(function (zone, index) {
+            return {
+              type: "column",
+              name: zone,
+              showInLegend: true,
+              dataPoints: Object.keys(res[zone]).map(function (annee, index2) {
+                return { x: parseInt(annee), y: res[zone][annee] }
+              })
+            }
+          })
+        )
+        setKey(`${props.info['debut']}_${props.info['fin']}_${props.info['espece']}`);
+      }) //ca va print les resultats sur la console  -- dans le setData je stock les résultats
+  });
 
-      const options = {
-        animationEnabled: true,
-        exportEnabled: true,
-        theme: "light2",
-        title:{
-          text: "Affichage des echouages"
-        },
-        data:[{
-          type: "column",
-          dataPoints: [
-            { x: 110, y: 21 },
-            { x: 120, y: 49 },
-            { x: 130, y: 36 }
-          ]
-        }]
-      }
 
-      return (
-        <div className="Graphique">
-          <CanvasJSChart options = {options} />
-        </div>
-      );
-    }
+  let options = {
+    animationEnabled: true,
+    exportEnabled: true,
+    theme: "light2",
+    title: {
+      text: "Affichage des echouages"
+    },
+    axisX: {
+      title: "Annee"
+    },
+    axisY: {
+      title: "Nombre echouage"
+    },
+    data: data
+    // data: [{
+    //   type: "column",
+    //   color: "pink",
+    //   name: "Yolo",
+    //   showInLegend: true,
+    //   dataPoints: [
+    //     { x: 110, y: 21 },
+    //     { x: 120, y: 49 },
+    //     { x: 130, y: 36 }
+    //   ]
+    // }, {
+    //   type: "column",
+    //   dataPoints: [
+    //     { x: 110, y: 25 },
+    //     { x: 120, y: 70 },
+    //     { x: 130, y: 25 }
+    //   ]
+    // }]
   }
 
-  export default Graphique;
+  return (
+    <div className="Graphique">
+      <CanvasJSChart options={options}
+        key={key}
+        onRef={ref => (chart.current = ref)} />
+    </div>
+  );
+}
+
+export default Graphique;
