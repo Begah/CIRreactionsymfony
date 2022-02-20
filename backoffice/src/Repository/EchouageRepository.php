@@ -48,7 +48,25 @@ class EchouageRepository extends ServiceEntityRepository
     }
     */
 
-    public function findAny($zone_id, $espece_id)
+    public function findPage(int $page, int $num_per_page)
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.id', 'ASC')
+            ->setFirstResult($page * $num_per_page)
+            ->setMaxResults($num_per_page)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function pagesCount(int $num_per_page)
+    {
+        return intval(ceil($this->createQueryBuilder('e')
+            ->select('count(e.id)')
+            ->getQuery()
+            ->getSingleScalarResult() / $num_per_page));
+    }
+
+    public function findAny(int $zone_id, int $espece_id)
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.zone = :zoneid')
@@ -56,8 +74,7 @@ class EchouageRepository extends ServiceEntityRepository
             ->setParameter('zoneid', $zone_id)
             ->setParameter('especeid', $espece_id)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     public function findDuring($zone_id, $espece_id, $annee_min, $annee_max)
@@ -72,7 +89,6 @@ class EchouageRepository extends ServiceEntityRepository
             ->setParameter('annee_min', $annee_min)
             ->setParameter('annee_max', $annee_max)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 }

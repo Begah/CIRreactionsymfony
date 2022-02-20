@@ -33,6 +33,13 @@
                 <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
+        <tr>
+            <td colspan="4"> 
+            <a href="{{ path('echouage_index_page', {'page': 0}) }}"> &#60;&#60; </a>  &nbsp; &nbsp;
+            <a href="{{ path('echouage_index_page', {'page': page-1}) }}"> &#60; </a> <a href="{{ path('echouage_index_page', {'page': page+1}) }}"> &#62; </a>  &nbsp; &nbsp;
+            <a href="{{ path('echouage_index_page', {'page': page_count-1}) }}"> &#62;&#62; </a> 
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>    

@@ -198,21 +198,21 @@ form div div *:nth-child(odd) {
 /* Fish AI */
 @keyframes swim_left {
   from {
-    left: 0%;
+    left: var(--start_x);
   }
 
   to {
-    left: 95%;
+    left: var(--end_x);
   }
 }
 
 @keyframes swim_down {
   from {
-    top: 5%;
+    top: var(--start_y);
   }
 
   to {
-    top: 85%;
+    top: var(--end_y);
   }
 }
 
@@ -221,6 +221,39 @@ form div div *:nth-child(odd) {
   position: absolute;
   
   animation: 
-    30s infinite alternate both swim_left, 
-    20s 5s infinite alternate both swim_down;
+    var(--dur_horzintal) infinite alternate both swim_left, 
+    var(--dur_vertical) 2s infinite alternate both swim_down;
+}
+
+.fish_start1 {
+  --start_y: 0%;
+  --end_y: 95%;
+
+  --start_x: 5%;
+  --end_x: 85%;
+
+  --dur_horzintal: 30s;
+  --dur_vertical: 25s;
+}
+
+.fish_start2 {
+  --start_y: 95%;
+  --end_y: 0%;
+
+  --start_x: 5%;
+  --end_x: 85%;
+
+  --dur_horzintal: 20s;
+  --dur_vertical: 25s;
+}
+
+.fish_start3 {
+  --start_y: 0%;
+  --end_y: 95%;
+
+  --start_x: 85%;
+  --end_x: 5%;
+
+  --dur_horzintal: 20s;
+  --dur_vertical: 15s;
 }

@@ -20,12 +20,34 @@ class EchouageController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
+        return $this->redirectToRoute("echouage_index_page", ['page' => 0]);
+    }
+
+    /**
+     * @Route("/page/{page}", name="echouage_index_page", methods={"GET"})
+     */
+    public function index_page(EntityManagerInterface $entityManager, int $page): Response
+    {
+        $pages_count = $entityManager->getRepository(Echouage::class)->pagesCount(50);
+
+        if ($pages_count == 0) {
+            return $this->render('echouage/index.html.twig', [
+                'echouages' => [],
+            ]);
+        } elseif ($page >= $pages_count) {
+            return $this->redirectToRoute('echouage_index_page', ['echouages' => [], 'page' => $pages_count - 1, 'page_count' => $pages_count]);
+        } elseif ($page < 0) {
+            return $this->redirectToRoute('echouage_index_page', ['echouages' => [], 'page' => 0, 'page_count' => $pages_count]);
+        }
+
         $echouages = $entityManager
             ->getRepository(Echouage::class)
-            ->findAll();
+            ->findPage($page, 50);
 
         return $this->render('echouage/index.html.twig', [
             'echouages' => $echouages,
+            'page' => $page,
+            'page_count' => $pages_count
         ]);
     }
 
@@ -86,7 +108,7 @@ class EchouageController extends AbstractController
      */
     public function delete(Request $request, Echouage $echouage, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$echouage->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $echouage->getId(), $request->request->get('_token'))) {
             $entityManager->remove($echouage);
             $entityManager->flush();
         }
