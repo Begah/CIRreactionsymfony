@@ -227,37 +227,104 @@ form div div *:nth-child(odd) {
   animation: 
     var(--dur_horzintal) infinite alternate both swim_left, 
     var(--dur_vertical) 2s infinite alternate both swim_down;
+  animation-timing-function: linear;
 }
 
 .fish_start1 {
   --start_y: 0%;
-  --end_y: 95%;
+  --end_y: 90%;
 
   --start_x: 5%;
   --end_x: 85%;
 
-  --dur_horzintal: 30s;
-  --dur_vertical: 25s;
+  --dur_horzintal: 15s;
+  --dur_vertical: 14s;
 }
 
 .fish_start2 {
-  --start_y: 95%;
+  --start_y: 90%;
   --end_y: 0%;
 
   --start_x: 5%;
   --end_x: 85%;
 
-  --dur_horzintal: 20s;
-  --dur_vertical: 25s;
+  --dur_horzintal: 7s;
+  --dur_vertical: 13s;
 }
 
 .fish_start3 {
   --start_y: 0%;
-  --end_y: 95%;
+  --end_y: 90%;
 
   --start_x: 85%;
   --end_x: 5%;
 
-  --dur_horzintal: 20s;
+  --dur_horzintal: 10s;
   --dur_vertical: 15s;
+}
+
+.fish_start4 {
+  --start_y: 20%;
+  --end_y: 90%;
+
+  --start_x: 85%;
+  --end_x: 5%;
+
+  --dur_horzintal: 17s;
+  --dur_vertical: 10s;
+}
+
+.fish_start5 {
+  --start_y: 0%;
+  --end_y: 90%;
+
+  --start_x: 40%;
+  --end_x: 85%;
+
+  --dur_horzintal: 12s;
+  --dur_vertical: 15s;
+}
+
+.fish_start6 {
+  --start_y: 40%;
+  --end_y: 90%;
+
+  --start_x: 0%;
+  --end_x: 70%;
+
+  --dur_horzintal: 15s;
+  --dur_vertical: 12s;
+}
+
+.fish_start7 {
+  --start_y: 90%;
+  --end_y: 5%;
+
+  --start_x: 30%;
+  --end_x: 95%;
+
+  --dur_horzintal: 8s;
+  --dur_vertical: 12s;
+}
+
+.fish_start8 {
+  --start_y: 40%;
+  --end_y: 5%;
+
+  --start_x: 95%;
+  --end_x: 20%;
+
+  --dur_horzintal: 7s;
+  --dur_vertical: 12s;
+}
+
+.fish_start9 {
+  --start_y: 76%;
+  --end_y: 5%;
+
+  --start_x: 95%;
+  --end_x: 10%;
+
+  --dur_horzintal: 7s;
+  --dur_vertical: 6s;
 }
