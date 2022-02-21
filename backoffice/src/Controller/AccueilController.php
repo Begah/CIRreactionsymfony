@@ -97,6 +97,7 @@ class AccueilController extends AbstractController
             $zone_column_index = 1;
             $column_count = 1 + count($liste_zones);
             $year_per_zones = array_fill(0, $column_count - 1, 0);
+            $max_echouage = 0;
 
             foreach ($liste_zones as $id => $zone_entity) {
                 array_push($header, $zone_entity->getZone());
@@ -116,6 +117,7 @@ class AccueilController extends AbstractController
                         }
                     }
                     $liste[$echouage_entity->getDate()][$zone_column_index] += $echouage_entity->getNombre();
+                    $max_echouage = max($max_echouage, $echouage_entity->getNombre());
                 }
                 $zone_column_index++;
             }
@@ -125,8 +127,9 @@ class AccueilController extends AbstractController
             sort($annees);
 
             $average = array_fill(0, $column_count - 1, 0);
-            $min = array_fill(0, $column_count - 1, 1e9);
+            $min = array_fill($max_echouage, $column_count - 1, 0);
             $max = array_fill(0, $column_count - 1, 0);
+
             foreach ($annees as $index => $annee) {
                 array_push($tableau, $liste[$annee]);
 
@@ -138,6 +141,8 @@ class AccueilController extends AbstractController
             }
             for($i = 0; $i < $column_count - 1; ++$i) {
                 $average[$i] = $year_per_zones[$i] == 0 ? 0 : round($average[$i] / $year_per_zones[$i]);
+                $max[$i] = $year_per_zones[$i] == 0 ? 0 : $max[$i];
+                $min[$i] = $year_per_zones[$i] == 0 ? 0 : $min[$i];
             }
 
             return array(

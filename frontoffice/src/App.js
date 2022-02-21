@@ -14,18 +14,18 @@ function App() {
   }
   
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div class="App">
+      <header class="App-header">
+        <img src={logo} class="App-logo" alt="logo" />
       </header>
         
-      <div className='corps'>
+      <div class='corps'>
         <Champ submit_callback={form_submit}/>
         <Graphique info={data}/>
       </div>
       <footer id="footer">
         <p>
-          test footer
+          Emma Finck, Mathieu Roux
         </p>
       </footer>
     </div>

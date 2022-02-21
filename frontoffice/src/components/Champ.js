@@ -1,7 +1,6 @@
 import React from "react";
 import '../App.css';
 
-
 function Champ(props) {
     const [demande, setDemande] = React.useState({ debut: 1997, fin: 2018, espece: "Baleine de Cuvier" }) //mettre une val à chacun
     const [data, setData] = React.useState([]) //pour stocker les infos qui sont renvoyé après avoir submit le formulaire = les résultats
@@ -32,7 +31,7 @@ function Champ(props) {
     //le espece.map va créer un tableau des espece et va les afficher dans les options du select
     return (
         <div className="formulaire">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} class="form1">
                 <input type="number" defaultValue={1990} min="1990" max="2018" id="DateDeb" name="debut" onChange={(e) => Update(e)}></input>
                 <br />
                 <input type="number" defaultValue={2018} min="1990" max="2018" id="DateFin" name="fin" onChange={(e) => Update(e)}></input>
@@ -52,7 +51,7 @@ function Champ(props) {
                 </select>
 
                 <br />
-                <input type="submit" />
+                <input type="submit" class ="form_submit"/>
                 <br />
             </form>
         </div>

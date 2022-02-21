@@ -1,21 +1,36 @@
+/* Global */
+html, body, .App {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+  max-height: 100%;
+
+  min-width: 100%;
+  width: 100%;
+  max-width: 100%;
+
+  position: fixed;
+}
+
 .App {
   text-align: center;
 }
 
 .App-logo {
-  height: 20vmin;
+  height: 5vmin;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 0.50s linear;
+    animation: App-logo-spin infinite 2s linear;
   }
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 10%;
+  min-height: 5%;
+  max-height: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,16 +47,17 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-.App{
+.App {
   background: linear-gradient(45deg, #49a09d, #5f2c82);
 }
 
-.footer{
+.footer {
   background-color: black;
 }
 
@@ -53,3 +69,36 @@
   background-color: chartreuse;
 }
 */
+
+.form1 {
+  display: flex;
+}
+
+.form1 * {
+  float: left;
+  clear: both;
+}
+
+.form_submit {
+  clear: both;
+}
+
+.canvasjs-chart-container {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.corps * {
+  margin-top: 10px;
+}
+
+canvas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  margin: auto;
+  border: 2px solid blue
+}

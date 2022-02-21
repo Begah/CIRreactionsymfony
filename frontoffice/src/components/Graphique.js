@@ -7,12 +7,10 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 function Graphique(props) {
   const [data, setData] = React.useState();
-  const [key, setKey] = React.useState();
 
   let chart = React.useRef();
 
   React.useEffect(() => {
-    console.log("Data : ", `http://127.0.0.1:8000/api/espece/${props.info['debut']}/${props.info['fin']}/${props.info['espece']}`);
     fetch(`http://127.0.0.1:8000/api/espece/${props.info['debut']}/${props.info['fin']}/${props.info['espece']}`) //$ permet de dire que c'est la variable
       .then((res) => res.json())
       .then((res) => {
@@ -23,23 +21,24 @@ function Graphique(props) {
               name: zone,
               showInLegend: true,
               dataPoints: Object.keys(res[zone]).map(function (annee, index2) {
-                return { x: parseInt(annee), y: res[zone][annee] }
+                return { x: new Date(parseInt(annee),0,0), y: res[zone][annee] }
               })
             }
           })
         )
-        setKey(`${props.info['debut']}_${props.info['fin']}_${props.info['espece']}`);
       }) //ca va print les resultats sur la console  -- dans le setData je stock les résultats
-  });
+  }, [props]);
 
 
   let options = {
     animationEnabled: true,
-    exportEnabled: true,
+    // exportEnabled: true,
     theme: "light2",
     title: {
       text: "Affichage des echouages"
     },
+    width: 800,
+    height: 500,
     axisX: {
       title: "Annee"
     },
@@ -47,30 +46,11 @@ function Graphique(props) {
       title: "Nombre echouage"
     },
     data: data
-    // data: [{
-    //   type: "column",
-    //   color: "pink",
-    //   name: "Yolo",
-    //   showInLegend: true,
-    //   dataPoints: [
-    //     { x: 110, y: 21 },
-    //     { x: 120, y: 49 },
-    //     { x: 130, y: 36 }
-    //   ]
-    // }, {
-    //   type: "column",
-    //   dataPoints: [
-    //     { x: 110, y: 25 },
-    //     { x: 120, y: 70 },
-    //     { x: 130, y: 25 }
-    //   ]
-    // }]
   }
 
   return (
-    <div className="Graphique">
+    <div class="Graphique">
       <CanvasJSChart options={options}
-        key={key}
         onRef={ref => (chart.current = ref)} />
     </div>
   );
