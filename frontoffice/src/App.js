@@ -7,8 +7,10 @@ import Champ from './components/Champ.js';
 import Graphique from "./components/Graphique";
 
 function App() {
+  // use state to comminucate between form and graph
   const [data, setData] = React.useState({ debut: 1000, fin: 2018, espece: "Baleine de Cuvier" })
 
+  // Callback function for the form
   function form_submit(debut, fin, espece) {
       setData({ debut:debut, fin:fin, espece:espece });
   }

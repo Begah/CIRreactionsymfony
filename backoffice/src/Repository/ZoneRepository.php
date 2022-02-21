@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Zone repository, used to interact with the zone table in the database
+ * @author Mathieu Roux & Emma Finck
+ * @version 1.0.0
+ */
+
 namespace App\Repository;
 
 use App\Entity\Zone;

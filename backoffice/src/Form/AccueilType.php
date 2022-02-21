@@ -2,6 +2,12 @@
 
 namespace App\Form;
 
+/**
+ * Homepage form, custom form that doesn't depend on an entity
+ * @author Mathieu Roux & Emma Finck
+ * @version 1.0.0
+ */
+
 use App\Entity\Echouage;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,12 +29,13 @@ class AccueilType extends AbstractType
         ->add('Espece', TextType::class, [
             'required' => true,
             'empty_data' => '',
-            'attr'=>['autocomplete' => 'off']
+            'attr'=>['autocomplete' => 'off'] // Custom autcomplete used 
         ])
         ->add('Submitted', HiddenType::class, [
-            'data' => 0,
+            'data' => 0, // Hidden value, used to keep track of first submission or not, used for css animation
         ]);
         
+        // Event to keep track of first submission or not, used for css animation
         $builder->get('Submitted')->addEventListener(FormEvents::PRE_SUBMIT, 
         function (FormEvent $event) {
             if ($event->getData() < 3) {

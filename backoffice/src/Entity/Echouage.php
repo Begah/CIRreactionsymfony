@@ -1,6 +1,12 @@
 <?php
 
-namespace App\Entity;
+/**
+ * Echouage entity, created automatically by symfony CRUD and left unchanged
+ * @author Mathieu Roux & Emma Finck
+ * @version 1.0.0
+ */
+
+ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Echouage form, created automatically by symfony CRUD and left unchanged
+ * @author Mathieu Roux & Emma Finck
+ * @version 1.0.0
+ */
+
 namespace App\Form;
 
 use App\Entity\Echouage;

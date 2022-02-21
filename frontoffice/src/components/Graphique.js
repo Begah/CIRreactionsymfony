@@ -15,24 +15,23 @@ function Graphique(props) {
       .then((res) => res.json())
       .then((res) => {
         setData(
-          Object.keys(res).map(function (zone, index) {
+          Object.keys(res).map(function (zone, index) { // for each zones, setup the data and name
             return {
               type: "column",
               name: zone,
               showInLegend: true,
-              dataPoints: Object.keys(res[zone]).map(function (annee, index2) {
+              dataPoints: Object.keys(res[zone]).map(function (annee, index2) { // the api sends a json with [1992 => 2, 1993 => 4, ...], we need in the format [{x:1992, y:2}, {x:1993, y:4}]
                 return { x: new Date(parseInt(annee),0,0), y: res[zone][annee] }
               })
             }
           })
         )
       }) //ca va print les resultats sur la console  -- dans le setData je stock les résultats
-  }, [props]);
+  }, [props]); // Only fetch api when props changes, ie when App.js changes espece, fin or debut
 
 
   let options = {
-    animationEnabled: true,
-    // exportEnabled: true,
+    animationEnabled: true, // Animation unfortunately only works on the first showing, doesn't animate when update new values
     theme: "light2",
     title: {
       text: "Affichage des echouages"

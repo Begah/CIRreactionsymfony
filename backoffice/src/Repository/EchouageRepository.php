@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Echouage repository, used to interact with the echouage table in the database
+ * @author Mathieu Roux & Emma Finck
+ * @version 1.0.0
+ */
+
 namespace App\Repository;
 
 use App\Entity\Echouage;
@@ -48,16 +54,18 @@ class EchouageRepository extends ServiceEntityRepository
     }
     */
 
+    // Find the echouage of a corresponding page
     public function findPage(int $page, int $num_per_page)
     {
         return $this->createQueryBuilder('e')
             ->orderBy('e.id', 'ASC')
-            ->setFirstResult($page * $num_per_page)
-            ->setMaxResults($num_per_page)
+            ->setFirstResult($page * $num_per_page) // Skip the echouage of the previous pages
+            ->setMaxResults($num_per_page) // Take only 50
             ->getQuery()
             ->getResult();
     }
 
+    // Count the number of pages necessary
     public function pagesCount(int $num_per_page)
     {
         return intval(ceil($this->createQueryBuilder('e')
@@ -66,6 +74,7 @@ class EchouageRepository extends ServiceEntityRepository
             ->getSingleScalarResult() / $num_per_page));
     }
 
+    // Find echouage for a specific espece and a specific zone 
     public function findAny(int $zone_id, int $espece_id)
     {
         return $this->createQueryBuilder('e')
@@ -77,6 +86,7 @@ class EchouageRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    // Find echouage during a timeframe of a particular species
     public function findDuring($zone_id, $espece_id, $annee_min, $annee_max)
     {
         return $this->createQueryBuilder('e')

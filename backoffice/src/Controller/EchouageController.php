@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Espece controller, created automatically by symfony CRUD and modified the index pages
+ * @author Mathieu Roux & Emma Finck
+ * @version 1.0.0
+ */
+
 namespace App\Controller;
 
 use App\Entity\Echouage;
@@ -17,6 +23,7 @@ class EchouageController extends AbstractController
 {
     /**
      * @Route("/", name="echouage_index", methods={"GET"})
+     * Automatically created by crud but altered : this route used to send all of the echouages in the database, it made the web browser slow down because there are some 4k-5k entries, not a sane approach
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -25,9 +32,11 @@ class EchouageController extends AbstractController
 
     /**
      * @Route("/page/{page}", name="echouage_index_page", methods={"GET"})
+     * Returns maximim 50 entries of echouage corresponding to the given page number, ie page 0 is entry 0-49, page 1 is entry 50-99....
      */
     public function index_page(EntityManagerInterface $entityManager, int $page): Response
     {
+        // Check if give page number is too hight or not positive, redirect if it's the case
         $pages_count = $entityManager->getRepository(Echouage::class)->pagesCount(50);
 
         if ($pages_count == 0) {
@@ -40,6 +49,7 @@ class EchouageController extends AbstractController
             return $this->redirectToRoute('echouage_index_page', ['echouages' => [], 'page' => 0, 'page_count' => $pages_count]);
         }
 
+        // Safe from sql injection, page is a int
         $echouages = $entityManager
             ->getRepository(Echouage::class)
             ->findPage($page, 50);

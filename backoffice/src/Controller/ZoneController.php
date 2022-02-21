@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Zone controller, created automatically by symfony CRUD and left unchanged
+ * @author Mathieu Roux & Emma Finck
+ * @version 1.0.0
+ */
+
 namespace App\Controller;
 
 use App\Entity\Zone;

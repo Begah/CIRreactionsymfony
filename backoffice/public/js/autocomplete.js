@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         });
                     } else {
                         // We reached our target server, but it returned an error
-
+                        // sadge
                     }
                 };
 

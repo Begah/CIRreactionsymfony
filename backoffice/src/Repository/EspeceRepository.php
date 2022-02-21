@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Espece repository, used to interact with the espece table in the database
+ * @author Mathieu Roux & Emma Finck
+ * @version 1.0.0
+ */
+
 namespace App\Repository;
 
 use App\Entity\Espece;
@@ -48,6 +54,7 @@ class EspeceRepository extends ServiceEntityRepository
     }
     */
 
+    // Find all especes beginning with value
     public function findEntitiesByName(string $value)
     {
         return $this->createQueryBuilder('e')
@@ -58,6 +65,7 @@ class EspeceRepository extends ServiceEntityRepository
         ;
     }
 
+    // Find the only espece via the name
     public function findEntityByName(string $value): ?Espece
     {
         return $this->createQueryBuilder('e')
